@@ -5,18 +5,21 @@
 const friends = require('../data/friends.js');
 
 function apiRoutes(app) {
+    // get the friends array from friends javascript
     app.get("/api/friends", (request, response) => {
         response.json(friends);
     });
 
     app.post("/api/newFriend", (request, response) => {
-        // let newFriend = request.body;
-        // apiRoutes.addFriend(newFriend);
+        // add new friend 
         let newFriend = request.body;
-        // friends.addFriend(newFriend);
+        // convert each score in scores array to number
         score = (newFriend.scores).map(Number) ;
+        // get the total for new friend. 
+        // The total will be used to find the best friend match
         newFriend.totalsum = score.reduce(getSum);
 
+        // return json object
         response.json(startSearching(newFriend));
     });
 
@@ -25,31 +28,28 @@ function apiRoutes(app) {
     };
 
     function startSearching(friend) {
-
+        // for each of friend in friends array,
+        // convert score to number
         friends.forEach(element => {
             score = (element.scores).map(Number);
             objName = element.name;
             objImg = element.photo;
-
-            // element.totalsum = score.reduce(getSum);  
-            
         });
 
         var bestMatchPosition = 0;
-        // var current = Math.abs(friend.totalsum - friends[0].totalsum);
 
-        // var bestMatchPosition = 0; // assume its the first person to start
+        // for each person in friends array
         for(var i=0; i < friends.length; i++){
         
-        var temp = Math.abs(friend.totalsum - friends[i].totalsum);
+            var temp = Math.abs(friend.totalsum - friends[i].totalsum);
 
-        // Lower number in comparison difference means better match
-        console.log("temp " + temp);
-        var temp2 = Math.abs(friend.totalsum - friends[bestMatchPosition].totalsum)
-        console.log("tem2 " + temp2);
-        if(temp <= temp2){
-            bestMatchPosition = i;
-        }
+            // Lower number in comparison difference means better match
+            console.log("temp " + temp);
+            var temp2 = Math.abs(friend.totalsum - friends[bestMatchPosition].totalsum)
+            console.log("tem2 " + temp2);
+            if(temp <= temp2){
+                bestMatchPosition = i;
+            }
         }
 
         var bestFriendMatch = friends[bestMatchPosition];
@@ -62,8 +62,6 @@ function apiRoutes(app) {
         console.log("retrun friends");
         console.log(friends);
 
-        // return json object
-        // res.json(bestFriendMatch);
         return bestFriendMatch;
     }
 
