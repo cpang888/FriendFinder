@@ -8,7 +8,7 @@ let friends = [
 {
     name: "Tom Cruise",
     photo:"https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwjcv5a_tejcAhUHc98KHcPOA1wQjRx6BAgBEAU&url=https%3A%2F%2Fwww.masala.com%2Fwow-tom-cruise-to-be-in-india-for-mission-impossible-264584.html&psig=AOvVaw2xHy8r1OmI6uj6ve_uatVH&ust=1534194350456787",
-    scores: [5, 4, 4, 4, 4, 3, 2, 1, 5, 5]
+    scores: [5, 2, 2, 2, 2, 1, 2, 1, 3, 3]
 }
 ];
 
