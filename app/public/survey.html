@@ -56,12 +56,12 @@
 	       };
 	 
            console.log(newFriend);
-           
-            $.post("../api/newFriend", newFriend)
+           console.log("before post newFriend");
+
+            $.post("/api/newFriend", newFriend)
                 .then(data => {
                     console.log(data);
                 });
-
 
             $("#reserve-name").val("");
 	        $("#reserve-photo").val("");

@@ -2,7 +2,11 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
 
-const friends = require('./app/data/friends');
+/*
+Your `server.js` file should require the basic npm packages we've used in class: `express`, `body-parser` and `path`.
+*/
+const htmlRoutes = require('./app/routing/htmlRoutes');
+const apiRoutes = require('./app/routing/apiRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -11,18 +15,20 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.get("/", (request, response) => {
-    response.sendFile(path.join(__dirname, "app/public/home.html"));
+    htmlRoutes.default(response);
 });
 
-
 app.get("/api/survey", (request, response) => {
-    response.sendFile(path.join(__dirname, "app/public/survey.html"));
+    htmlRoutes.survey(response);
+});
+
+app.get("/api/friends", (request, response) => {
+    return response.json(apiRoutes.friends());
 });
 
 app.post("/api/newFriend", (request, response) => {
-    // response.sendFile(path.join(__dirname, "app/public/survey.html"));
     let newFriend = request.body;
-    friends.addFriend(newFriend);
+    apiRoutes.addFriend(newFriend);
 });
 
 app.listen(PORT, () => {

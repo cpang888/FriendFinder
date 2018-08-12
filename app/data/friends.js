@@ -12,3 +12,10 @@ exports.addFriend = function(newFriend) {
     console.log(friends);
     console.log("*** end addFriend");
 }
+
+exports.getAll = function() {
+
+    console.log("*** start getAll");
+    return friends;
+    console.log("*** end getAll");
+}
